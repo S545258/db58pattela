@@ -10,9 +10,9 @@ module.exports = app;
 var db = mongoose.connection; 
 db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
 db.once("open", function(){ console.log("Connection to DB succeeded")}); 
-function recreateDB(){ 
+async function recreateDB(){ 
   // Delete everything 
-   Costume.deleteMany(); 
+  await Costume.deleteMany(); 
  
   let instance1 = new Costume({costume_type:"ghost",  size:'large',cost:25.4}); 
 instance1.save( function(err,doc) { 
@@ -63,6 +63,7 @@ app.use('/users', usersRouter);
 app.use('/cups', cupsRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
