@@ -63,6 +63,7 @@ app.use('/users', usersRouter);
 app.use('/cups', cupsRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
+app.use('/Costume', Costume);
 
 
 // catch 404 and forward to error handler
