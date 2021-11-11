@@ -2,6 +2,41 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+
+const connectionString = process.env.MONGO_CONmongoose = require('mongoose'); 
+mongoose.connect(connectionString,{useNewUrlParser: true,useUnifiedTopology: true}); 
+
+module.exports = app;
+var db = mongoose.connection; 
+db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
+db.once("open", function(){ console.log("Connection to DB succeeded")}); 
+function recreateDB(){ 
+  // Delete everything 
+   Costume.deleteMany(); 
+ 
+  let instance1 = new Costume({costume_type:"ghost",  size:'large',cost:25.4}); 
+instance1.save( function(err,doc) { 
+      if(err) 
+      return console.error(err); 
+      console.log("First object saved") 
+  }); 
+} 
+let instance2 = new Costume({costume_type:"checked shirt",  size:' xtra large',cost:26.4}); 
+instance2.save( function(err,doc) { 
+      if(err) 
+      return console.error(err); 
+      console.log("second object saved") 
+  });
+  let instance3 = new Costume({costume_type:"half hands shirt",  size:' xtra large',cost:30.4}); 
+  instance3.save( function(err,doc) { 
+        if(err) 
+        return console.error(err); 
+        console.log("third object saved") 
+    });
+ 
+let reseed = true; 
+if (reseed) { recreateDB();} 
+ 
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
@@ -9,6 +44,7 @@ var usersRouter = require('./routes/users');
 var cupsRouter = require('./routes/cups');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
+var Costume = require("./models/costume"); 
 
 var app = express();
 
@@ -43,5 +79,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+ 
 module.exports = app;
