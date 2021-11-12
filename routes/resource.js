@@ -29,4 +29,7 @@ router.get("/costume", costume_controller.costume_list);
 
 /* GET costumes */ 
 router.get('/', costume_controlers.costume_view_all_Page ); 
-module.exports = router; 
+module.exports = router;
+
+ // GET request for one costume. 
+router.get('/costumes/:id', costume_controller.costume_detail); 
