@@ -10,13 +10,17 @@ var costume_controller = require("../controllers/costume");
 // GET resources base.
 router.get("/", api_controller.api);
 
+
+router.get('/delete', costume_controller.costume_delete_Page);
+
+// DELETE request to delete Costume. 
+router.delete('/costumes/:id', costume_controller.costume_delete); 
+
 /// costume ROUTES ///
 
 // POST request for creating a costume
 router.post("/costume", costume_controller.costume_create_post);
 
-// DELETE request to delete costume.
-router.delete("/costume/:id", costume_controller.costume_delete);
 
 // PUT request to update costume.
 router.put("/costume/:id", costume_controller.costume_update_put);
@@ -28,8 +32,15 @@ router.get("/costume/:id", costume_controller.costume_detail);
 router.get("/costume", costume_controller.costume_list);
 
 /* GET costumes */ 
-router.get('/', costume_controlers.costume_view_all_Page ); 
+router.get('/', costume_controller.costume_view_all_Page ); 
 module.exports = router;
+ 
+/* GET detail costume page */ 
+router.get('/detail', costume_controlers.costume_view_one_Page); 
 
- // GET request for one costume. 
-router.get('/costumes/:id', costume_controller.costume_detail); 
+/* GET create costume page */ 
+router.get('/create', costume_controlers.costume_create_Page); 
+
+/* GET create update page */ 
+router.get('/update', costume_controlers.costume_update_Page); 
+ 

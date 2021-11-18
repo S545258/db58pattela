@@ -47,6 +47,7 @@ app.use('/users', usersRouter);
 app.use('/addmods', addModsRouter);
 app.use('/selector', selectorRouter);
 app.use('/resource', resourceRouter);
+app.use('/costume', resourceRouter);
 
 
 
