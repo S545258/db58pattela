@@ -7,6 +7,10 @@ var api_controller = require("../controllers/api");
 var costume_controller = require("../controllers/costume");
 
 /// API ROUTE ///
+
+/* GET costumes */ 
+router.get('/', costume_controller.costume_view_all_Page ); 
+
 // GET resources base.
 router.get("/", api_controller.api);
 
@@ -31,8 +35,7 @@ router.get("/costume/:id", costume_controller.costume_detail);
 // GET request for list of all costume items.
 router.get("/costume", costume_controller.costume_list);
 
-/* GET costumes */ 
-router.get('/', costume_controller.costume_view_all_Page ); 
+
 module.exports = router;
  
 /* GET detail costume page */ 

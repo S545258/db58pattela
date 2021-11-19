@@ -2,7 +2,14 @@ extends layout
 
 block content
   h1= title
+   
   - let items = results; 
+  div(class="container-fluid") 
+    div(class="row m-1") 
+      each item in items
+       - let destination = `dispatch(\"/costume/update?id=${item._id}\")` 
+        div(class="row-sm-2", class="m-1") Item #{item.costume_type}(#{item.size}) is #{item.cost}
+        button.btn( class="btn-primary ml-1", onclick= destination) Update 
   - let o;
   script.
     function buy(x){
@@ -12,3 +19,8 @@ block content
     div(class='row')
       each o, c in items 
         div(class='col-sm-3' onclick=`buy(${c})`) #{o} 
+         
+  script. 
+    function dispatch(path){ 
+      window.location.href=path 
+    }
