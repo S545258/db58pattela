@@ -8,6 +8,8 @@ var costume_controller = require("../controllers/costume");
 
 /// API ROUTE ///
 
+
+
 /* GET costumes */ 
 router.get('/', costume_controller.costume_view_all_Page ); 
 
@@ -24,6 +26,8 @@ router.delete('/costumes/:id', costume_controller.costume_delete);
 
 // POST request for creating a costume
 router.post("/costume", costume_controller.costume_create_post);
+
+
 
 
 // PUT request to update costume.
@@ -44,6 +48,17 @@ router.get('/detail', costume_controlers.costume_view_one_Page);
 /* GET create costume page */ 
 router.get('/create', costume_controlers.costume_create_Page); 
 
+
+// A little function to check if we have an authorized user and continue on or 
+// redirect to login. 
+const secured = (req, res, next) => { 
+    if (req.user){ 
+      return next(); 
+    } 
+    req.session.returnTo = req.originalUrl; 
+    res.redirect("/login"); 
+  } 
 /* GET create update page */ 
-router.get('/update', costume_controlers.costume_update_Page); 
+
+router.get('/update', secured, costume_controlers.costume_update_Page); 
  

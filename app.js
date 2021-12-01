@@ -4,9 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport'); 
+var router = express.Router(); 
 var LocalStrategy = require('passport-local').Strategy;
 mongoose = require('mongoose'); 
 var Costume = require("./models/costume");
+
 passport.use(new LocalStrategy( 
   function(username, password, done) { 
     Account.findOne({ username: username }, function (err, user) { 
@@ -108,8 +110,8 @@ async function recreateDB(){
   await Costume.deleteMany(); 
  
   let instance1 = new Costume({costume_type:"sweatshirt",  size:'large', cost:32.7});
-  let instance2 = new Costume({costume_type:"checked shirt",  size:'large', cost:25.4});
-  let instance3 = new Costume({costume_type:"plainshirt",  size:'large', cost:76.9});
+  let instance2 = new Costume({costume_type:"checked shirt",  size:'large', cost:26.4});
+  let instance3 = new Costume({costume_type:"plainshirt",  size:'large', cost:38.9});
 
   instance1.save( function(err,doc) { 
       if(err) return console.error(err); 
@@ -131,5 +133,6 @@ let reseed = true;
 if (reseed) {
   recreateDB();
 }
+
 
 module.exports = app;
