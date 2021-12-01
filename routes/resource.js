@@ -39,16 +39,6 @@ router.get("/costume/:id", costume_controller.costume_detail);
 // GET request for list of all costume items.
 router.get("/costume", costume_controller.costume_list);
 
-
-module.exports = router;
- 
-/* GET detail costume page */ 
-router.get('/detail', costume_controlers.costume_view_one_Page); 
-
-/* GET create costume page */ 
-router.get('/create', costume_controlers.costume_create_Page); 
-
-
 // A little function to check if we have an authorized user and continue on or 
 // redirect to login. 
 const secured = (req, res, next) => { 
@@ -57,8 +47,19 @@ const secured = (req, res, next) => {
     } 
     req.session.returnTo = req.originalUrl; 
     res.redirect("/login"); 
-  } 
+  }
+
+module.exports = router;
+ 
+/* GET detail costume page */ 
+router.get('/detail', costume_controlers.costume_view_one_Page); 
+
+/* GET create costume page */ 
+router.get('/create', costume_controlers.costume_create_Page); 
+ 
 /* GET create update page */ 
 
 router.get('/update', secured, costume_controlers.costume_update_Page); 
+
+router.get('/delete', secured, costume_controlers.costume_delete); 
  
